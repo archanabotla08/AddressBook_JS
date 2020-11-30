@@ -68,20 +68,78 @@ function validatePersonDetails(...personDetails_ObjectAddPerson) {
     }
 
 }
+let readline = require('readline');
+let readInput = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+var arrayOfInputs = 0;
+function edit(firstName) {
+    for (i = 0; i < AddressBookArray.length; i++) {
+        if (AddressBookArray[i].firstName == firstName) {
+            let listPerson = firstName;
+            readInput.question("Enter field and updated value :", function (input) {
+                arrayOfInputs = input.trim().split(' ');
+                console.log(arrayOfInputs[1]);
+                let choice = arrayOfInputs[0];
+                let newvalue = arrayOfInputs[1];
+                readInput.close();
+                switch (choice) {
+                    case "lastName": let lastName = newvalue;
+                        listPerson.lastName = lastName;
+                        console.log("Updated Successfully");
+                        break;
+                    case "address": let address = newvalue;
+                        listPerson.address = address;
+                        console.log("Updated Successfully");
+                        break;
+                    case "city": let city = newvalue;
+                        listPerson.city = city;
+                        console.log("Updated Successfully");
+                        break;
+                    case "state": let state = newvalue;
+                        listPerson.state = state;
+                        console.log("Updated Successfully");
+                        break;
+                    case "zip": let zip = parseInt(newvalue);
+                        listPerson.zip = zip;
+                        console.log("Updated Successfully");
+                        break;
+                    case "phone number": let phoneNumber = parseInt(newvalue);
+                        listPerson.phoneNumber = phoneNumber;
+                        console.log("Updated Successfully");
+                        break;
+                    case "email": let email = newvalue;
+                        listPerson.email = email;
+                        console.log("Updated Successfully");
+                        break;
+                    default:
+                        throw "Invalid choice";
+                }
+            });
+        } else {
+            //   console.log("person Doesn't exists");
+        }
+    }
+}
 //UC3
 
 let AddressBookArray = new Array();
 
 try {
-    let personDetails_ObjectAddPerson = new PersonDetails("Archana", "Botla", "Somesh Colony", "Nanded", "Maharashtra", 789182, 9999999999, "abc@gail.com");
-    if (validatePersonDetails(personDetails_ObjectAddPerson)) {
-        AddressBookArray.push(personDetails_ObjectAddPerson);
+    let personDetails_ObjectAddPerson1 = new PersonDetails("Archana", "Botla", "Somesh Colony", "Nanded", "Maharashtra", 789182, 9999999999, "abc@gail.com");
+    let personDetails_ObjectAddPerson2 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Maharashtra", 789182, 9999999999, "abc@gail.com");
+
+    if (validatePersonDetails(personDetails_ObjectAddPerson1) && validatePersonDetails(personDetails_ObjectAddPerson2)) {
+        AddressBookArray.push(personDetails_ObjectAddPerson1);
+        AddressBookArray.push(personDetails_ObjectAddPerson2);
+        let result = edit("Archana");
     } else {
         throw "Invalid input";
     }
 
+
 } catch (Exception) {
     console.log(Exception);
 }
-console.log(AddressBookArray);
-
+//console.log(AddressBookArray);
