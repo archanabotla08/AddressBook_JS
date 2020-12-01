@@ -78,80 +78,107 @@ function edit(firstName) {
     var arrayOfInputs = 0;
     readInput.question("Enter person name to edit :", function (input) {
         firstName = input.trim().split(' ');
-  
-    for (i = 0; i < AddressBookArray.length; i++) {
-        if (AddressBookArray[i].firstName == firstName) {
-            let listPerson = firstName;
-            readInput.question("Enter field and updated value :", function (input) {
-                arrayOfInputs = input.trim().split(' ');
-                console.log(arrayOfInputs[1]);
-                let choice = arrayOfInputs[0];
-                let newvalue = arrayOfInputs[1];
-                switch (choice) {
-                    case "lastName": let lastName = newvalue;
-                        listPerson.lastName = lastName;
-                        console.log("Updated Successfully");
-                        break;
-                    case "address": let address = newvalue;
-                        listPerson.address = address;
-                        console.log("Updated Successfully");
-                        deletePerson();
-                        break;
-                    case "city": let city = newvalue;
-                        listPerson.city = city;
-                        console.log("Updated Successfully");
-                        deletePerson();
-                        break;
-                    case "state": let state = newvalue;
-                        listPerson.state = state;
-                        console.log("Updated Successfully");
-                        deletePerson();
-                        break;
-                    case "zip": let zip = parseInt(newvalue);
-                        listPerson.zip = zip;
-                        console.log("Updated Successfully");
-                        deletePerson();
-                        break;
-                    case "phone number": let phoneNumber = parseInt(newvalue);
-                        listPerson.phoneNumber = phoneNumber;
-                        console.log("Updated Successfully");
-                        deletePerson();
-                        break;
-                    case "email": let email = newvalue;
-                        listPerson.email = email;
-                        console.log("Updated Successfully");
-                        deletePerson();
-                        break;
-                    default:
-                        throw "Invalid choice";
-                }
-            });
-     
-        } else {
-            //   console.log("person Doesn't exists");
+
+        for (i = 0; i < AddressBookArray.length; i++) {
+            if (AddressBookArray[i].firstName == firstName) {
+                let listPerson = firstName;
+                readInput.question("Enter field and updated value :", function (input) {
+                    arrayOfInputs = input.trim().split(' ');
+                    console.log(arrayOfInputs[1]);
+                    let choice = arrayOfInputs[0];
+                    let newvalue = arrayOfInputs[1];
+                    switch (choice) {
+                        case "lastName": let lastName = newvalue;
+                            listPerson.lastName = lastName;
+                            console.log("Updated Successfully");
+                            break;
+                        case "address": let address = newvalue;
+                            listPerson.address = address;
+                            console.log("Updated Successfully");
+                            deletePerson();
+                            break;
+                        case "city": let city = newvalue;
+                            listPerson.city = city;
+                            console.log("Updated Successfully");
+                            deletePerson();
+                            break;
+                        case "state": let state = newvalue;
+                            listPerson.state = state;
+                            console.log("Updated Successfully");
+                            deletePerson();
+                            break;
+                        case "zip": let zip = parseInt(newvalue);
+                            listPerson.zip = zip;
+                            console.log("Updated Successfully");
+                            deletePerson();
+                            break;
+                        case "phone number": let phoneNumber = parseInt(newvalue);
+                            listPerson.phoneNumber = phoneNumber;
+                            console.log("Updated Successfully");
+                            deletePerson();
+                            break;
+                        case "email": let email = newvalue;
+                            listPerson.email = email;
+                            console.log("Updated Successfully");
+                            deletePerson();
+                            break;
+                        default:
+                            throw "Invalid choice";
+                    }
+                });
+
+            } else {
+                //   console.log("person Doesn't exists");
+            }
+
         }
-   
-    }
-});
+    });
 
 }
 
 //UC5
-function deletePerson(){
+function deletePerson() {
     let arrayOfInputs = 0;
     readInput.question("Enter person name to delete :", function (input) {
         arrayOfInputs = input.trim().split(' ');
         readInput.close();
-   
-    AddressBookArray.forEach(person => {
-        if (person.firstName == arrayOfInputs[0]){
-            AddressBookArray.pop();
-            console.log("Delete Successfully");
-        }else{console.log("person doesn't exists")}
-    });
 
-});
+        AddressBookArray.forEach(person => {
+            if (person.firstName == arrayOfInputs[0]) {
+                AddressBookArray.pop();
+                console.log("Delete Successfully");
+            } else { console.log("person doesn't exists") }
+        });
+
+    });
 }
+
+//UC7
+let newPerson = "";
+let personInAddressbook = new Array();
+function checkDuplicate(...personToAdd) {
+    var x = Object.keys(personToAdd);
+    for (i = 0; i < x.length; i++) {
+        newPerson = personToAdd[i].firstName;
+    }
+    AddressBookArray.forEach(person => {
+        personInAddressbook.push(person.firstName);
+    });
+    let duplicate = false;
+    for (i = 0; i < personInAddressbook.length; i++) {
+        if (i == newPerson) {
+            duplicate = true;
+            break;
+        }
+    }
+    if (duplicate) {
+        AddressBookArray.push(personToAdd);
+    } else {
+        throw " Person Exists";
+    }
+}
+
+
 //UC3
 
 let AddressBookArray = new Array();
@@ -159,15 +186,17 @@ let AddressBookArray = new Array();
 try {
     let personDetails_ObjectAddPerson1 = new PersonDetails("Archana", "Botla", "Somesh Colony", "Nanded", "Maharashtra", 789182, 9999999999, "abc@gail.com");
     let personDetails_ObjectAddPerson2 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Maharashtra", 789182, 9999999999, "abc@gail.com");
-  
+    let personDetails_ObjectAddPerson3 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Maharashtra", 789182, 9999999999, "abc@gail.com");
+
     if (validatePersonDetails(personDetails_ObjectAddPerson1) && validatePersonDetails(personDetails_ObjectAddPerson2)) {
         AddressBookArray.push(personDetails_ObjectAddPerson1);
         AddressBookArray.push(personDetails_ObjectAddPerson2);
         //UC6
         console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
         let choice = 0;
-        let result  = edit();
-        
+        let result = edit();
+        checkDuplicate(personDetails_ObjectAddPerson3);
+
     } else {
         throw "Invalid input";
     }
