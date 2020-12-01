@@ -174,7 +174,31 @@ function checkDuplicate(...personToAdd) {
     if (duplicate) {
         AddressBookArray.push(personToAdd);
     } else {
-        throw " Person Exists";
+        throw "Person Exists";
+    }
+}
+
+//UC8
+
+function searchByCityOrState(field,value){
+    switch(field){
+        case "city":
+                AddressBookArray.filter( i => i.city == value,console.log("Bycity  " + AddressBookArray[i].firstName,));
+            break;
+        case "state":
+            AddressBookArray.filter(i => i.state == value,console.log("Bystate  " + AddressBookArray[i].firstName));
+    }
+}
+
+//UC 9
+
+function viewPersonByCityorState(field,value){
+    switch(field){
+        case "city":
+                AddressBookArray.filter( i => i.city == value,console.log("View Bycity==  " + AddressBookArray[i].firstName + " " + AddressBookArray[i].lastName));
+            break;
+        case "state":
+            AddressBookArray.filter(i => i.state == value,console.log("View Bystate  " + AddressBookArray[i].firstName + " " + AddressBookArray[i].lastName));
     }
 }
 
@@ -185,16 +209,26 @@ let AddressBookArray = new Array();
 
 try {
     let personDetails_ObjectAddPerson1 = new PersonDetails("Archana", "Botla", "Somesh Colony", "Nanded", "Maharashtra", 789182, 9999999999, "abc@gail.com");
-    let personDetails_ObjectAddPerson2 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Maharashtra", 789182, 9999999999, "abc@gail.com");
+    let personDetails_ObjectAddPerson2 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Karnataka", 789182, 9999999999, "abc@gail.com");
     let personDetails_ObjectAddPerson3 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Maharashtra", 789182, 9999999999, "abc@gail.com");
 
     if (validatePersonDetails(personDetails_ObjectAddPerson1) && validatePersonDetails(personDetails_ObjectAddPerson2)) {
         AddressBookArray.push(personDetails_ObjectAddPerson1);
         AddressBookArray.push(personDetails_ObjectAddPerson2);
         //UC6
+
+          
+     
+        //UC9
+        viewPersonByCityorState("city","Mumbai");
+        viewPersonByCityorState("state","Karnataka");
+        //UC8
+        searchByCityOrState("city","Mumbai");
+        searchByCityOrState("state","Maharashtra");
         console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
         let choice = 0;
         let result = edit();
+
         checkDuplicate(personDetails_ObjectAddPerson3);
 
     } else {
