@@ -202,6 +202,18 @@ function viewPersonByCityorState(field,value){
     }
 }
 
+//UC 10
+
+function countByCityorState(field,value){
+    switch(field){
+        case "city":
+            console.log("Count By City: "+ AddressBookArray.filter( i => i.city == value).reduce(count => count + 1, 0));
+            break;
+        case "state":
+            console.log("Count By State: "+ AddressBookArray.filter(i => i.state == value).reduce(count => count + 1, 0));
+    }
+}
+
 
 //UC3
 
@@ -225,6 +237,9 @@ try {
         //UC8
         searchByCityOrState("city","Mumbai");
         searchByCityOrState("state","Maharashtra");
+        //UC10
+        countByCityorState("city","Mumbai");
+        countByCityorState("state","Maharashtra")
         console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
         let choice = 0;
         let result = edit();
