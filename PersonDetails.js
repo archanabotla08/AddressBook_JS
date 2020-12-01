@@ -198,10 +198,10 @@ function searchByCityOrState(field,value){
 function viewPersonByCityorState(field,value){
     switch(field){
         case "city":
-                AddressBookArray.filter( i => i.city == value,console.log("View Bycity==  " + AddressBookArray[i].firstName + " " + AddressBookArray[i].lastName));
+                AddressBookArray.filter( i => i.city == value,console.log("View Bycity -----  " + AddressBookArray[i].firstName + " " + AddressBookArray[i].lastName));
             break;
         case "state":
-            AddressBookArray.filter(i => i.state == value,console.log("View Bystate  " + AddressBookArray[i].firstName + " " + AddressBookArray[i].lastName));
+            AddressBookArray.filter(i => i.state == value,console.log("View Bystate ------ " + AddressBookArray[i].firstName + " " + AddressBookArray[i].lastName));
     }
 }
 
@@ -210,18 +210,25 @@ function viewPersonByCityorState(field,value){
 function countByCityorState(field,value){
     switch(field){
         case "city":
-            console.log("Count By City: "+ AddressBookArray.filter( i => i.city == value).reduce(count => count + 1, 0));
+            console.log("-----Count By City ---------: "+ AddressBookArray.filter( i => i.city == value).reduce(count => count + 1, 0));
             break;
         case "state":
-            console.log("Count By State: "+ AddressBookArray.filter(i => i.state == value).reduce(count => count + 1, 0));
+            console.log("-----Count By State: -------- "+ AddressBookArray.filter(i => i.state == value).reduce(count => count + 1, 0));
     }
 }
 
 //UC 11
  function sortPersonByName(){
-    console.log("Sort By Name" + AddressBookArray.sort((i, j) => i.firstName.localeCompare(j.firstName)));
+    console.log("----------Sort By Name---------: " + "\n" + AddressBookArray.sort((i, j) => i.firstName.localeCompare(j.firstName)));
  }
 
+ //UC 12
+
+ function sortPersonByCityorState(){
+    console.log("-------Sort By ZipCode----------: "  + "\n" + AddressBookArray.sort((a, b) => a.zip === (b.zip)));
+    console.log("--------Sort By City-------------: "  + "\n" + AddressBookArray.sort((a, b) => a.city.localeCompare(b.city)));
+    console.log("-------Sort By State-----------: "  + "\n" + AddressBookArray.sort((a, b) => a.state.localeCompare(b.state)));   
+ }
 
 //UC3
 
@@ -250,7 +257,9 @@ try {
         countByCityorState("state","Maharashtra");
         //UC11
         sortPersonByName();
-        console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
+        //UC12
+        sortPersonByCityorState();
+        console.log("Number of Contacts ----- : " + AddressBookArray.reduce(count => count + 1, 0));
         let choice = 0;
         let result = edit();
 
