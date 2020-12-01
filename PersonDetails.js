@@ -183,10 +183,10 @@ function checkDuplicate(...personToAdd) {
 function searchByCityOrState(field,value){
     switch(field){
         case "city":
-                AddressBookArray.filter( i => i.city == value,console.log("city exists: " + value));
+                AddressBookArray.filter( i => i.city == value,console.log("Bycity  " + AddressBookArray[i].firstName,));
             break;
         case "state":
-            AddressBookArray.filter(i => i.state == value,console.log("state exists: " + value));
+            AddressBookArray.filter(i => i.state == value,console.log("Bystate  " + AddressBookArray[i].firstName));
     }
 }
 
