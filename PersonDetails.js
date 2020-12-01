@@ -159,12 +159,15 @@ let AddressBookArray = new Array();
 try {
     let personDetails_ObjectAddPerson1 = new PersonDetails("Archana", "Botla", "Somesh Colony", "Nanded", "Maharashtra", 789182, 9999999999, "abc@gail.com");
     let personDetails_ObjectAddPerson2 = new PersonDetails("Sweety", "Botla", "Somesh Colony", "Mumbai", "Maharashtra", 789182, 9999999999, "abc@gail.com");
-
+  
     if (validatePersonDetails(personDetails_ObjectAddPerson1) && validatePersonDetails(personDetails_ObjectAddPerson2)) {
         AddressBookArray.push(personDetails_ObjectAddPerson1);
         AddressBookArray.push(personDetails_ObjectAddPerson2);
+        //UC6
+        console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
         let choice = 0;
         let result  = edit();
+        
     } else {
         throw "Invalid input";
     }
