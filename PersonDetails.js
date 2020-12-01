@@ -73,8 +73,12 @@ let readInput = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-var arrayOfInputs = 0;
+
 function edit(firstName) {
+    var arrayOfInputs = 0;
+    readInput.question("Enter person name to edit :", function (input) {
+        firstName = input.trim().split(' ');
+  
     for (i = 0; i < AddressBookArray.length; i++) {
         if (AddressBookArray[i].firstName == firstName) {
             let listPerson = firstName;
@@ -83,7 +87,6 @@ function edit(firstName) {
                 console.log(arrayOfInputs[1]);
                 let choice = arrayOfInputs[0];
                 let newvalue = arrayOfInputs[1];
-                readInput.close();
                 switch (choice) {
                     case "lastName": let lastName = newvalue;
                         listPerson.lastName = lastName;
@@ -92,35 +95,62 @@ function edit(firstName) {
                     case "address": let address = newvalue;
                         listPerson.address = address;
                         console.log("Updated Successfully");
+                        deletePerson();
                         break;
                     case "city": let city = newvalue;
                         listPerson.city = city;
                         console.log("Updated Successfully");
+                        deletePerson();
                         break;
                     case "state": let state = newvalue;
                         listPerson.state = state;
                         console.log("Updated Successfully");
+                        deletePerson();
                         break;
                     case "zip": let zip = parseInt(newvalue);
                         listPerson.zip = zip;
                         console.log("Updated Successfully");
+                        deletePerson();
                         break;
                     case "phone number": let phoneNumber = parseInt(newvalue);
                         listPerson.phoneNumber = phoneNumber;
                         console.log("Updated Successfully");
+                        deletePerson();
                         break;
                     case "email": let email = newvalue;
                         listPerson.email = email;
                         console.log("Updated Successfully");
+                        deletePerson();
                         break;
                     default:
                         throw "Invalid choice";
                 }
             });
+     
         } else {
             //   console.log("person Doesn't exists");
         }
+   
     }
+});
+
+}
+
+//UC5
+function deletePerson(){
+    let arrayOfInputs = 0;
+    readInput.question("Enter person name to delete :", function (input) {
+        arrayOfInputs = input.trim().split(' ');
+        readInput.close();
+   
+    AddressBookArray.forEach(person => {
+        if (person.firstName == arrayOfInputs[0]){
+            AddressBookArray.pop();
+            console.log("Delete Successfully");
+        }else{console.log("person doesn't exists")}
+    });
+
+});
 }
 //UC3
 
@@ -133,7 +163,8 @@ try {
     if (validatePersonDetails(personDetails_ObjectAddPerson1) && validatePersonDetails(personDetails_ObjectAddPerson2)) {
         AddressBookArray.push(personDetails_ObjectAddPerson1);
         AddressBookArray.push(personDetails_ObjectAddPerson2);
-        let result = edit("Archana");
+        let choice = 0;
+        let result  = edit();
     } else {
         throw "Invalid input";
     }
