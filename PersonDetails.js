@@ -16,6 +16,9 @@ class PersonDetails {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+    toString() {
+        return "First name: " + this.firstName + "\nLast name: " + this.lastName + "\nAddress: " + this.address + "\nCity: " + this.city + "\nState: " + this.state + "\nZip: " + this.zip + "\nPhone number: " + this.phoneNumber + "\nEmail: " + this.email;
+    }
 }
 
 function validatePersonDetails(...personDetails_ObjectAddPerson) {
@@ -214,6 +217,11 @@ function countByCityorState(field,value){
     }
 }
 
+//UC 11
+ function sortPersonByName(){
+    console.log("Sort By Name" + AddressBookArray.sort((i, j) => i.firstName.localeCompare(j.firstName)));
+ }
+
 
 //UC3
 
@@ -239,7 +247,9 @@ try {
         searchByCityOrState("state","Maharashtra");
         //UC10
         countByCityorState("city","Mumbai");
-        countByCityorState("state","Maharashtra")
+        countByCityorState("state","Maharashtra");
+        //UC11
+        sortPersonByName();
         console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
         let choice = 0;
         let result = edit();
