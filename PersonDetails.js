@@ -178,6 +178,17 @@ function checkDuplicate(...personToAdd) {
     }
 }
 
+//UC8
+
+function searchByCityOrState(field,value){
+    switch(field){
+        case "city":
+                AddressBookArray.filter( i => i.city == value,console.log("city exists: " + value));
+            break;
+        case "state":
+            AddressBookArray.filter(i => i.state == value,console.log("state exists: " + value));
+    }
+}
 
 //UC3
 
@@ -192,11 +203,15 @@ try {
         AddressBookArray.push(personDetails_ObjectAddPerson1);
         AddressBookArray.push(personDetails_ObjectAddPerson2);
         //UC6
-        console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
+       
         let choice = 0;
         let result = edit();
+        searchByCityOrState("city","Mumbai");
+        searchByCityOrState("state","Maharashtra");
+        console.log("Number of Contacts : " + AddressBookArray.reduce(count => count + 1, 0));
         checkDuplicate(personDetails_ObjectAddPerson3);
-
+       
+       
     } else {
         throw "Invalid input";
     }
